@@ -10,7 +10,7 @@
     "lint": "blyss | snazzy",
     "format": "prettier --single-quote --no-semi --write \"src/**/*.js\"",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "browserify scramble_333.js > bundle.js",
+    "build:client": "browserify src/index.js > scramby.js"
   },
   "repository": {
     "type": "git",
@@ -24,6 +24,7 @@
   },
   "homepage": "https://github.com/saadq/x-cube#readme",
   "dependencies": {
+    "random-int": "^1.0.0",
     "random-int-js": "^0.2.0",
     "raphael": "^2.2.7"
   },
