@@ -12,7 +12,11 @@ Compiled to Javascript using GWT.
 
 'use strict'
 
-const Raphael = require('raphael')
+let Raphael
+
+if (typeof window !== 'undefined') {
+	Raphael = require('raphael')
+}
 
 function randInt(min, max) {
   if (max === undefined) {
@@ -1933,6 +1937,10 @@ function drawSquare(r, wi, h, cx, cy, w, fillColor) {
 }
 
 var drawScramble = function(parentElement, state, w, h) {
+	if (typeof window === 'undefined') {
+		throw new Error('You cannot use drawScramble outside of the browser.')
+	}
+
   var colorString = 'wrgoby' // UFRLBD
   var colorScheme = {
     U: colorString[0],
@@ -1994,12 +2002,9 @@ var getRandomScramble = function() {
 }
 
 var scrambler = {
-  /* mark2 interface */
   initialize: ini,
   getRandomScramble: getRandomScramble,
   drawScramble: drawScramble
-
-  /* Other methods */
 }
 
 module.exports = scrambler

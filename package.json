@@ -37,7 +37,9 @@
   "blyss": {
     "ignore": [
       "dist",
-      "build"
+      "build",
+      "src/scramblers",
+      "examples"
     ]
   }
 }
