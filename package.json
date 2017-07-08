@@ -1,0 +1,42 @@
+{
+  "name": "jsss",
+  "version": "1.0.0",
+  "description": "This directory contains several scramblers used for Mark 2 that can be used in any Javascript project.",
+  "main": "scramble_222.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "lint": "blyss | snazzy",
+    "format": "prettier --single-quote --no-semi --write \"src/**/*.js\"",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "browserify scramble_333.js > bundle.js",
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/saadq/x-cube.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/saadq/x-cube/issues"
+  },
+  "homepage": "https://github.com/saadq/x-cube#readme",
+  "dependencies": {
+    "random-int-js": "^0.2.0",
+    "raphael": "^2.2.7"
+  },
+  "devDependencies": {
+    "blyss": "^7.0.0",
+    "browserify": "^14.4.0",
+    "prettier": "^1.5.2",
+    "snazzy": "^7.0.0"
+  },
+  "blyss": {
+    "ignore": [
+      "dist",
+      "build"
+    ]
+  }
+}
