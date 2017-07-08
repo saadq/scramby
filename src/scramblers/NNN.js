@@ -11,6 +11,12 @@ Ported by Lucas Garron, November 24, 2011.
 
 'use strict'
 
+let Raphael
+
+if (typeof window !== 'undefined') {
+  Raphael = require('raphael')
+}
+
 function randInt(min, max) {
   if (max === undefined) {
     max = min
@@ -557,13 +563,10 @@ var generate_NNN_scrambler = function(size, seqlen, mult) {
     }
   }
 
-  /* mark2 interface */
   return {
     initialize: initializeFull,
     getRandomScramble: getRandomScramble,
     drawScramble: drawScramble
-
-    /* Other methods */
   }
 }
 

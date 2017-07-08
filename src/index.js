@@ -26,10 +26,8 @@ function scramby({ count = 1, type = '777' } = {}) {
   return count <= 1
     ? scrambler.getRandomScramble().scramble_string
     : Array.from({ length: count }).map(
-        () => scrambler.getRandomScramble()
+        () => scrambler.getRandomScramble().scramble_string
       )
 }
-
-console.log(scramby())
 
 module.exports = scramby
