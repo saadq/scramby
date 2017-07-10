@@ -11,7 +11,7 @@ Ported by Lucas Garron, November 24, 2011.
 
 'use strict'
 
-let Raphael
+var Raphael
 
 if (typeof window !== 'undefined') {
   Raphael = require('raphael')
@@ -528,8 +528,8 @@ var generate_NNN_scrambler = function(size, seqlen, mult) {
   }
 
   /*
-       * Some helper functions.
-       */
+   * Some helper functions.
+   */
 
   var getRandomScramble = function() {
     scramble()
@@ -537,7 +537,7 @@ var generate_NNN_scrambler = function(size, seqlen, mult) {
 
     return {
       state: posit,
-      scramble_string: scramblestring(0)
+      scrambleString: scramblestring(0)
     }
   }
 

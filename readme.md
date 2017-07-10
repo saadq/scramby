@@ -10,7 +10,7 @@ Say you want 2x2x2 scrambles in your project. Include the 2x2x2 scrambler:
 
 Then call:
 
-    scramblers["222"].getRandomScramble().scramble_string
+    scramblers["222"].getRandomScramble().scrambleString
 
 (If you want to initialize before generating any scrambles, call `scramblers["222"].initialize()` before `getRandomScramble()`. However, `getRandomScramble()` will also initialize for you if needed.)
 
@@ -42,8 +42,8 @@ Each `scramblers[eventID]` object supports the following methods:
   - `null`: Deprecated argument (randomSource). Pass `null` if you need to pass `statusCallback`.
   - `statusCallback`: Some scramblers take a while to initialize. If you'd like to have it report back to you on progress, provide a `statusCallback` method that takes a string.
 - `getRandomScramble()`
-  - Get a random scramble. This returns an object `{scramble_string: string, state: object}`. Note that `initialize(...)` needs to have been called earlier.
-  - The `scramble_string` is a string represenation of the scrambling moves to be done.
+  - Get a random scramble. This returns an object `{scrambleString: string, state: object}`. Note that `initialize(...)` needs to have been called earlier.
+  - The `scrambleString` is a string represenation of the scrambling moves to be done.
   - The `state` object is an object whose structure depends on the scrambler implementation. It is useful for drawing.
 - `drawScramble(parentElement, state, width, height)`
   - The source for the Raphael.js library must be included before this method can be called.

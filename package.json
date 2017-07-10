@@ -8,6 +8,7 @@
   },
   "scripts": {
     "lint": "blyss | snazzy",
+    "fix": "blyss --fix",
     "format": "prettier --single-quote --no-semi --write \"src/**/*.js\"",
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "babel src --out-dir lib",
@@ -44,8 +45,8 @@
     "ignore": [
       "dist",
       "build",
-      "src/scramblers",
-      "examples"
+      "examples",
+      "src/scramblers"
     ]
   }
 }

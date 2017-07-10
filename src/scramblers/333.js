@@ -12,7 +12,7 @@ Compiled to Javascript using GWT.
 
 'use strict'
 
-let Raphael
+var Raphael
 
 if (typeof window !== 'undefined') {
 	Raphael = require('raphael')
@@ -1977,15 +1977,18 @@ var initialized = false
 var search
 
 var ini = function(callback, _, statusCallback) {
+  if (initialized) {
+    return
+  }
+
   if (typeof statusCallback !== 'function') {
     statusCallback = function() {}
   }
 
-  if (!initialized) {
-    search = new Search()
-    init_0(statusCallback)
-    initialized = true
-  }
+  search = new Search()
+  init_0(statusCallback)
+  initialized = true
+
   if (callback) setTimeout(callback, 0)
 }
 
@@ -1997,7 +2000,7 @@ var getRandomScramble = function() {
 
   return {
     state: posit,
-    scramble_string: solution
+    scrambleString: solution
   }
 }
 
