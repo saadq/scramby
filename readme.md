@@ -1,53 +1,113 @@
 # Javascript Solver/Scrambler Suite
 
-This directory contains several scramblers used for Mark 2 that can be used in any Javascript project.
+A module for generating [random-state scrambles](https://www.speedsolving.com/wiki/index.php/Random_State_Scramble) for twisty puzzles.
 
-## Example Usage
+## Installation
+```bash
+npm install scramby
+```
 
-Say you want 2x2x2 scrambles in your project. Include the 2x2x2 scrambler:
+## Usage
+```js
+import scramby from 'scramby'
+const scrambler = scramby()
 
-    <script src="scramble_222.js"></script>
+console.log(scrambler.getRandomScramble().scrambleString) // L2 U R2 B' R' B' L F2 D2 B D2 F D R2 U F2 R2 U' R2 F'
+```
 
-Then call:
+## API
+### `scramby([puzzle])`
+Creates a scrambler that can be used to generate random scrambles.
 
-    scramblers["222"].getRandomScramble().scrambleString
+#### Params
+* `{string}` **puzzle** - The type of puzzle.
+  * Valid types: `'222'`, `'333'`, `'444'`, `'555'`, `'666'`, or `'777'`
+  * default: `'333'`
 
-(If you want to initialize before generating any scrambles, call `scramblers["222"].initialize()` before `getRandomScramble()`. However, `getRandomScramble()` will also initialize for you if needed.)
+#### Returns:
+A `Scrambler` object.
 
-See [example.htm](./example.htm) for a slightly more thorough example with images.
+#### Example:
+```js
+import scramby from 'scramby'
+const scrambler5x5 = scramby('555')
+```
 
-## Mark 2 Scrambler Organization
+---
 
-Each scrambler is implemented in a Javascript file that creates a `scramblers` object (if it doesn't exist) and sets a property like `scramblers[eventID]`, where `eventID` is a string with the WCA event ID.
+### `scrambler.getRandomScramble()`
+Generates a random scramble.
 
-As of December 2011, the supported events are:
+#### Returns:
+ A `Scramble` object that has a `state` and a `scrambleString`. An example structure:
 
-- `scramble_222.js`: "222"
-- `scramble_333.js`: "333", "333bf", "333oh", "333fm", "333ft"
-- `scramble_NNN.js`: "444", "555", "666", "777", "444bf", "555bf"
-- `scramble_minx.js`: "minx"
-- `scramble_pyram.js`: "pyram"
-- `scramble_sq1.js`: "sq1"
-- `scramble_clock.js`: "clock"
+```json
+{
+  "state": "FRDFUBRFDBDRRRRRBBULLDFBLUUUFFUDLBFLDRBULLRBFFDLUBLUDD",
+  "scrambleString": "L2 D2 L2 F2 D2 B' U2 L2 F' D2 B' R' F' U' L' D2 B' U2 B D' U"
+}
+```
+The `state` is only needed if you want to draw the scramble.
 
-## Mark 2 Scrambler API
+#### Example:
 
-Each `scramblers[eventID]` object supports the following methods:
+```js
+import scramby from 'scramby'
+const scrambler = scramby()
 
-- `version`:
-  - A string like "December 25, 2011" that reports the last significant modification date of the scrambler.
-- `initialize(callback, null, statusCallback)`
-  - This method must be called before generating or drawing any scrambles.
-  - `callback`: Some scramblers are not instant to initialize (e.g. `333` takes about a second, `sq1` about 5 seconds). If a bunch of these are called in a row, the browser will not have a chance to be responsive. In order to support continuation-passing, you can provide a method to be called when the initialization is done. You can also pass in `null` and the initialization will simply return control to the caller when it is done.
-  - `null`: Deprecated argument (randomSource). Pass `null` if you need to pass `statusCallback`.
-  - `statusCallback`: Some scramblers take a while to initialize. If you'd like to have it report back to you on progress, provide a `statusCallback` method that takes a string.
-- `getRandomScramble()`
-  - Get a random scramble. This returns an object `{scrambleString: string, state: object}`. Note that `initialize(...)` needs to have been called earlier.
-  - The `scrambleString` is a string represenation of the scrambling moves to be done.
-  - The `state` object is an object whose structure depends on the scrambler implementation. It is useful for drawing.
-- `drawScramble(parentElement, state, width, height)`
-  - The source for the Raphael.js library must be included before this method can be called.
-  - `parentElement` is an HTML element. This method will append a new SVG element to the `parentElement` and draw the scramble in it.
-  - `state` is a valid puzzle state, as returned by `getRandomScramble()`
-  - `width` and `height` are the width and height of the desired SVG canvas to be drawn, in pixels.
+const { scrambleString } = scrambler.getRandomScramble()
+console.log(scrambleString) // L2 D2 L2 F2 D2 B' U2 L2 F' D2 B' R' F' U' L' D2 B' U2 B D' U
+```
 
+---
+
+### `scrambler.drawScramble(el, state, width, height)`
+Draws the scramble to an HTML Element.
+
+#### Params
+* `HTMLElement` **el** - The element to draw to.
+* `string` **state** - The state received from `getRandomScramble()`.
+* `number` **width** - The desired width for the drawing.
+* `number` **height** - The desired height for the drawing.
+
+
+#### Example:
+```js
+import scramby from 'scramby'
+const scrambler = scramby()
+
+const { state } = scrambler.getRandomScramble()
+scrambler.drawScramble(document.getElementById('my-el'), state, 300, 180)
+```
+
+
+
+## CLI
+
+```
+Usage
+  $ scramby [options]
+
+Options
+  --puzzle, -p  Specify which puzzle you want a scramble for (222 - 777).
+  --count, -c  The amount of scrambles you want.
+
+Examples
+  $ scramby
+  F  L2 B' D2 F' R2 U2 F' L2 B2 F' R' F' R' D  R' D  R  U  F' R
+
+  $ scramby -c 2
+  F' D2 B  L2 F  D2 U2 B  F2 U2 F  L  F  U2 R  D2 U' R  B  L2 F'
+  U2 R' D2 L' F2 D2 L  D2 F2 D2 L  B' D  U2 B2 L  F  L  B  R  U'
+
+  $ scramby -p 222 -c 2
+  F  U  F' U2 R  U  F  R' F
+  U' R' U  R  F  R' F2 R'
+```
+
+
+## Credits
+This is a fork of [jsss](github.com/cubing/jsss) in the form of an `npm` module. It's been modified to not require a global dependency of `Raphael` and it can work both in Node and on the browser.
+
+## License
+Uncertain. Read [this](https://github.com/cubing/jsss/issues/4) for more details.
