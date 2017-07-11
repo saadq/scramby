@@ -117,7 +117,7 @@ Then open up the `index.html` file for the example you want to see.
 
 
 ## Credits
-This is a fork of [jsss](github.com/cubing/jsss) in the form of an `npm` module. It's been modified to not require a global dependency of `Raphael` and it can work both in Node and on the browser.
+This is a fork of [jsss](https://github.com/cubing/jsss) in the form of an `npm` module. It's been modified to not require a global dependency of `Raphael` and it can work both in Node and on the browser.
 
 ## License
 Uncertain. Read [this](https://github.com/cubing/jsss/issues/4) for more details.
