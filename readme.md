@@ -1,6 +1,5 @@
-# Javascript Solver/Scrambler Suite
-
-A module for generating [random-state scrambles](https://www.speedsolving.com/wiki/index.php/Random_State_Scramble) for twisty puzzles.
+# scramby
+An npm module for generating [random-state scrambles](https://www.speedsolving.com/wiki/index.php/Random_State_Scramble) for twisty puzzles.
 
 ## Installation
 ```bash
