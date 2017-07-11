@@ -27,7 +27,7 @@ function randInt(min, max) {
     throw new TypeError('Expected all arguments to be numbers')
   }
 
-  return Math.floor(Math.random() * (max - min + 1) + min)
+  return Math.floor(Math.random() * (max - min) + min)
 }
 
 var posit = new Array()
@@ -795,7 +795,7 @@ var getRandomScramble = function() {
 
   return {
     state: posit,
-    scrambleString: solution
+    scrambleString: solution.replace(/ +(?= )/g, '').trim()
   }
 }
 
@@ -816,10 +816,6 @@ var initializeDrawing = function(continuation) {
 }
 
 var initializeFull = function(continuation, _) {
-  if (drawingInitialized) {
-    return
-  }
-
   initializeDrawing()
 
   if (continuation) {

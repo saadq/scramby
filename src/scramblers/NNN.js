@@ -27,7 +27,7 @@ function randInt(min, max) {
     throw new TypeError('Expected all arguments to be numbers')
   }
 
-  return Math.floor(Math.random() * (max - min + 1) + min)
+  return Math.floor(Math.random() * (max - min) + min)
 }
 
 // We use an anonymous wrapper (and call it immediately) in order to avoid leaving the generator hanging around in the top-level scope.

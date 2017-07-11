@@ -15,7 +15,7 @@ Compiled to Javascript using GWT.
 var Raphael
 
 if (typeof window !== 'undefined') {
-	Raphael = require('raphael')
+  Raphael = require('raphael')
 }
 
 function randInt(min, max) {
@@ -28,7 +28,7 @@ function randInt(min, max) {
     throw new TypeError('Expected all arguments to be numbers')
   }
 
-  return Math.floor(Math.random() * (max - min + 1) + min)
+  return Math.floor(Math.random() * (max - min) + min)
 }
 
 var _
@@ -1937,9 +1937,9 @@ function drawSquare(r, wi, h, cx, cy, w, fillColor) {
 }
 
 var drawScramble = function(parentElement, state, w, h) {
-	if (typeof window === 'undefined') {
-		throw new Error('You cannot use drawScramble outside of the browser.')
-	}
+  if (typeof window === 'undefined') {
+    throw new Error('You cannot use drawScramble outside of the browser.')
+  }
 
   var colorString = 'wrgoby' // UFRLBD
   var colorScheme = {
@@ -2000,7 +2000,7 @@ var getRandomScramble = function() {
 
   return {
     state: posit,
-    scrambleString: solution
+    scrambleString: solution.replace(/ +(?= )/g, '').trim()
   }
 }
 
