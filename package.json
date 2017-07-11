@@ -1,6 +1,6 @@
 {
   "name": "scramby",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Generates scrambles for twisty puzzles.",
   "main": "lib/index.js",
   "bin": {
