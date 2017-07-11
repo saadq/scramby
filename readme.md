@@ -57,7 +57,6 @@ const scrambler = scramby()
 const { scrambleString } = scrambler.getRandomScramble()
 console.log(scrambleString) // L2 D2 L2 F2 D2 B' U2 L2 F' D2 B' R' F' U' L' D2 B' U2 B D' U
 ```
-
 ---
 
 ### `scrambler.drawScramble(el, state, width, height)`
@@ -78,6 +77,9 @@ const scrambler = scramby()
 const { state } = scrambler.getRandomScramble()
 scrambler.drawScramble(document.getElementById('my-el'), state, 300, 180)
 ```
+
+#### Output:
+![](http://i.imgur.com/C4MW7JF.png)
 
 
 
