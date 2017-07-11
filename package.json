@@ -14,8 +14,8 @@
     "fix": "blyss --fix",
     "format": "prettier --single-quote --no-semi --write \"src/**/*.js\"",
     "build": "babel src --out-dir lib",
-    "postbuild": "npm run build-example",
-    "build-example": "cd examples/scramble-with-draw && npm run build",
+    "postbuild": "npm run build-examples",
+    "build-examples": "cd examples/scramble-with-draw && npm run build && cd ../scramble && npm run build",
     "flow": "flow",
     "flow-typed": "flow-typed",
     "test": "npm run lint --silent && flow status && cross-env NODE_ENV=test BABEL_ENV=test ava tests/**/*.js --fail-fast --verbose"

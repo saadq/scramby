@@ -1,4 +1,11 @@
 const scramby = require('../../lib')
 const scrambler = scramby('222')
 
-document.body.innerHTML = scrambler.getRandomScramble().scrambleString
+const button = document.querySelector('button')
+const scramble = document.querySelector('#scramble')
+
+scramble.textContent = scrambler.getRandomScramble().scrambleString
+
+button.addEventListener('click', () => {
+  scramble.textContent = scrambler.getRandomScramble().scrambleString
+})
