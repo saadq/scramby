@@ -1,30 +1,38 @@
 {
   "name": "scramby",
-  "version": "1.0.0",
+  "version": "0.0.0",
   "description": "Generates scrambles for twisty puzzles.",
   "main": "lib/index.js",
   "bin": {
-    "scramby": "./lib/cli.js"
-  },
-  "directories": {
-    "lib": "lib"
+    "scramby": "lib/cli.js"
   },
   "scripts": {
+    "clean": "rimraf lib",
+    "prebuild": "npm run clean",
+    "build": "babel src --out-dir lib && flow-copy-source src lib",
+    "postbuild": "npm run build-examples",
     "lint": "blyss | snazzy",
     "fix": "blyss --fix",
     "format": "prettier --single-quote --no-semi --write \"src/**/*.js\"",
-    "build": "babel src --out-dir lib",
-    "postbuild": "npm run build-examples",
-    "build-examples": "cd examples/scramble-with-draw && npm run build && cd ../scramble && npm run build",
+    "prepublish": "npm run build",
     "flow": "flow",
     "flow-typed": "flow-typed",
-    "test": "npm run lint --silent && flow status && cross-env NODE_ENV=test BABEL_ENV=test ava tests/**/*.js --fail-fast --verbose"
+    "test": "npm run lint --silent && flow status && ava tests/**/*.js --fail-fast --verbose",
+    "build-examples": "cd examples/scramble-with-draw && npm run build && cd ../scramble && npm run build"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/saadq/scramby.git"
   },
-  "keywords": [],
+  "keywords": [
+    "rubiks",
+    "rubik's",
+    "cube",
+    "puzzle",
+    "scramble",
+    "scrambler",
+    "scramble-generator"
+  ],
   "author": "Saad Quadri",
   "license": "MIT",
   "bugs": {
@@ -41,16 +49,15 @@
     "babel-plugin-transform-flow-strip-types": "^6.22.0",
     "blyss": "^7.0.0",
     "browserify": "^14.4.0",
-    "cross-env": "^5.0.1",
     "flow-bin": "^0.49.1",
+    "flow-copy-source": "^1.2.0",
     "flow-typed": "^2.1.2",
     "prettier": "^1.5.2",
+    "rimraf": "^2.6.1",
     "snazzy": "^7.0.0"
   },
   "blyss": {
     "ignore": [
-      "dist",
-      "build",
       "examples",
       "src/scramblers"
     ]
