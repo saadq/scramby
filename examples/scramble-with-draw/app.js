@@ -1,11 +1,12 @@
 const scramby = require('../../lib')
+const scrambler = scramby('333')
 
-const scrambleNode = document.querySelector('#scramble')
-const drawNode = document.querySelector('#draw')
+// Generate and draw 5 scrambles
+for (var i=1; i <= 5; i++) {
+	const randomScramble = scrambler.getRandomScramble()
+	document.write("" + i + ". " + randomScramble.scrambleString + "<br>")
 
-const scramble = scramby({
-  type: '222',
-  draw: { el: drawNode, width: 300, height: 180 }
-})
-
-scrambleNode.textContent = scramble
+	const newDiv = document.createElement("div")
+	scrambler.drawScramble(newDiv, randomScramble.state, 300, 180)
+	document.body.appendChild(newDiv)
+}

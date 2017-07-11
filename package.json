@@ -1,8 +1,11 @@
 {
-  "name": "jsss",
+  "name": "scramby",
   "version": "1.0.0",
-  "description": "This directory contains several scramblers used for Mark 2 that can be used in any Javascript project.",
-  "main": "scramble_222.js",
+  "description": "Generates scrambles for twisty puzzles.",
+  "main": "lib/index.js",
+  "bin": {
+    "scramby": "./lib/cli.js"
+  },
   "directories": {
     "lib": "lib"
   },
@@ -10,32 +13,35 @@
     "lint": "blyss | snazzy",
     "fix": "blyss --fix",
     "format": "prettier --single-quote --no-semi --write \"src/**/*.js\"",
-    "test": "echo \"Error: no test specified\" && exit 1",
     "build": "babel src --out-dir lib",
+    "postbuild": "npm run build-example",
+    "build-example": "cd examples/scramble-with-draw && npm run build",
     "flow": "flow",
-    "flow-typed": "flow-typed"
+    "flow-typed": "flow-typed",
+    "test": "npm run lint --silent && flow status && cross-env NODE_ENV=test BABEL_ENV=test ava tests/**/*.js --fail-fast --verbose"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/saadq/x-cube.git"
+    "url": "git+https://github.com/saadq/scramby.git"
   },
   "keywords": [],
-  "author": "",
+  "author": "Saad Quadri",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/saadq/x-cube/issues"
+    "url": "https://github.com/saadq/scramby/issues"
   },
-  "homepage": "https://github.com/saadq/x-cube#readme",
+  "homepage": "https://github.com/saadq/scramby#readme",
   "dependencies": {
-    "random-int": "^1.0.0",
-    "random-int-js": "^0.2.0",
+    "meow": "^3.7.0",
     "raphael": "^2.2.7"
   },
   "devDependencies": {
+    "ava": "^0.20.0",
     "babel-core": "^6.25.0",
     "babel-plugin-transform-flow-strip-types": "^6.22.0",
     "blyss": "^7.0.0",
     "browserify": "^14.4.0",
+    "cross-env": "^5.0.1",
     "flow-bin": "^0.49.1",
     "flow-typed": "^2.1.2",
     "prettier": "^1.5.2",
@@ -48,5 +54,16 @@
       "examples",
       "src/scramblers"
     ]
+  },
+  "ava": {
+    "require": [
+      "babel-register",
+      "babel-polyfill"
+    ],
+    "babel": {
+      "plugins": [
+        "transform-flow-strip-types"
+      ]
+    }
   }
 }
