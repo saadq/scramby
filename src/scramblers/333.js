@@ -1951,6 +1951,7 @@ var drawScramble = function(parentElement, state, w, h) {
     D: colorString[5]
   }
 
+  parentElement.innerHTML = ''
   var r = Raphael(parentElement, w, h)
 
   var stateWithCenters = state + ' URFLBD'

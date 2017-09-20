@@ -675,6 +675,7 @@ var drawScramble = function(parentElement, state, w, h) {
 
   var colorString = 'wrgoby' // UFRLBD
 
+  parentElement.innerHTML = ''
   var r = Raphael(parentElement, w, h)
 
   var s = '',

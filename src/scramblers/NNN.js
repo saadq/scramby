@@ -307,6 +307,7 @@ var generate_NNN_scrambler = function(size, seqlen, mult) {
 
     var colorString = 'wrgoby' // UFRLBD
 
+    parentElement.innerHTML = ''
     var r = Raphael(parentElement, w, h)
 
     var s = '',
