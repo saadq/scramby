@@ -10,7 +10,7 @@
     "clean": "rimraf lib",
     "prebuild": "npm run clean",
     "build": "babel src --out-dir lib && flow-copy-source src lib",
-    "postbuild": "npm run build-examples",
+    "build-examples": "cd examples/scramble-with-draw && npm run build && cd ../scramble && npm run build",
     "lint": "blyss | snazzy",
     "fix": "blyss --fix",
     "format": "prettier --single-quote --no-semi --write \"src/**/*.js\"",
@@ -18,7 +18,7 @@
     "flow": "flow",
     "flow-typed": "flow-typed",
     "test": "npm run lint --silent && flow status && ava tests/**/*.js --fail-fast --verbose",
-    "build-examples": "cd examples/scramble-with-draw && npm run build && cd ../scramble && npm run build"
+    "prepublish": "npm run build"
   },
   "repository": {
     "type": "git",
@@ -47,8 +47,8 @@
   "devDependencies": {
     "ava": "^0.20.0",
     "babel-core": "^6.25.0",
-    "babel-plugin-transform-flow-strip-types": "^6.22.0",
-    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-flow": "^6.23.0",
     "blyss": "^7.0.0",
     "browserify": "^14.4.0",
     "flow-bin": "^0.49.1",
@@ -70,11 +70,9 @@
       "babel-polyfill"
     ],
     "babel": {
-      "plugins": [
-        "transform-flow-strip-types"
-      ],
       "presets": [
-        "es2015"
+        "env",
+        "flow"
       ]
     }
   }
